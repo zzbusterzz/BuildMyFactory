@@ -1,3 +1,4 @@
+using GoogleMobileAds.Api;
 using System;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ namespace Test.FactoryRun.Core
         private void Start()
         {
             OnUIGameAction += OnGameActionClick;
+            MobileAds.Initialize(initStatus => 
+            {
+                AdReward.LoadRewardedAd();
+            });
         }
 
         private void OnDestroy()

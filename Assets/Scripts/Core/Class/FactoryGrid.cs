@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Test.FactoryRun.Core
 {
+
     [Serializable]
     public class FactoryGrid
     {

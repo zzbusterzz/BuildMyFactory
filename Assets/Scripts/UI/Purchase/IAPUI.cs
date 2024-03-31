@@ -156,6 +156,10 @@ namespace Test.FactoryRun.UI
                         else if (payout.subtype == IAP_CURWITHAD)
                         {
                             //Trigger admob here
+                            AdReward.ShowRewardedAd(() =>
+                            {
+                                GameData.UpdateGem((int)payout.quantity);
+                            });
                         }
                         break;
 
