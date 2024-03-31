@@ -7,7 +7,7 @@ namespace Test.FactoryRun.Core
 {
     [RequireComponent(typeof(BoxCollider))]
     public class FactoryCell:MonoBehaviour,IPointerClickHandler
-    {
+    {   
         public FactoryLevel Level { get => level; }
 
         [SerializeField]

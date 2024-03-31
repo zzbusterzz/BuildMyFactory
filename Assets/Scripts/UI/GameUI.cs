@@ -4,10 +4,15 @@ using UnityEngine;
 
 namespace Test.FactoryRun.UI
 {
-
     public class GameUI : MonoBehaviour
     {
         public static Action<int> updateGemCountUI;
+
+        [SerializeField]
+        private GameObject iapPanel;
+
+        [SerializeField]
+        private GameObject gameBoostPanel;
 
         [SerializeField]
         private TextMeshProUGUI gemCounter;
@@ -25,6 +30,18 @@ namespace Test.FactoryRun.UI
         private void updateGemCounter(int obj)
         {
             gemCounter.SetText(obj.ToString());
+        }
+
+        public void ToggleIAPPanel(bool val)
+        {
+            iapPanel.SetActive(val);
+            gameBoostPanel.SetActive(false);
+        }
+
+        public void ToggleIGameBoosterPanel(bool val)
+        {
+            gameBoostPanel.SetActive(val);
+            iapPanel.SetActive(false);
         }
     }
 }

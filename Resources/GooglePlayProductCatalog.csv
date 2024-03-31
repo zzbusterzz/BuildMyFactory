@@ -1,0 +1,7 @@
+Product ID,Published State,Purchase Type,Auto Translate,Locale; Title; Description,Auto Fill Prices,Price,Pricing Template ID
+pack_of_20_gem,published,managed_by_android,false,en_US;20 gems;Contains 20 gems,true,990000,
+no_ad_pack,published,managed_by_android,false,en_US;no ads;no ads for you forever,true,5990000,
+no_ad_subs,published,managed_by_android,false,en_US;No ads 1 week;No ads for you every week,true,3990000,
+pack_of_50_gem,published,managed_by_android,false,en_US;50 gems;Contains 50 gems,true,1990000,
+pack_of_100_gem,published,managed_by_android,false,en_US;100 gems;Contains 100 gems,true,2990000,
+watch_ad,published,managed_by_android,false,en_US;5 gem  for ad;Get 5 gem by watching ad,true,10000,
