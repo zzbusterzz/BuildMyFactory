@@ -23,15 +23,19 @@ namespace Test.FactoryRun.Core
         private int blockIndex;
         private FactoryLevel level = FactoryLevel.LEVEL0;
         private GameObject visualRep;
+        private ParticleSystem spawnEffect;
 
         private float timeToSpawn;
         private float curTime;
         private int curGemCount;
-
+        private bool useBoost;
+        private int boostMult;
 
         public void Init(int index)
         {
             blockIndex = index;
+            spawnEffect = Instantiate(settings.GemGeneratedEffect, transform).GetComponent<ParticleSystem>();
+            spawnEffect.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         }
 
         public void UpdateSpawnData()
@@ -41,6 +45,12 @@ namespace Test.FactoryRun.Core
             timeToSpawn = gsd.Time;
         }
 
+        public void ToggleFactoryBoost(bool useBoost, int mult = 1)
+        {
+            this.useBoost = useBoost;
+            boostMult = mult;
+        }
+
         //We will use grouped time and time via update loop of monobehaviour attached to this
         //This will prevent multiple update calls from mono
         public void UpdateTime()
@@ -48,7 +58,8 @@ namespace Test.FactoryRun.Core
             curTime += Time.deltaTime;
             if(curTime >= timeToSpawn)
             {
-                FactoryGrid.OnGemSpawned.Invoke(curGemCount);
+                FactoryGrid.OnGemSpawned.Invoke(useBoost? curGemCount * boostMult : curGemCount);
+                spawnEffect.Play();
                 curTime = 0;
             }
         }

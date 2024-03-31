@@ -14,7 +14,7 @@ namespace Test.FactoryRun.UI
 {
     public class IAPUI : MonoBehaviour, IDetailedStoreListener
     {
-        private const string IAP_CUR = "GEM";
+        private const string IAP_CUR = "Gem";
         private const string IAP_CURWITHAD = "WatchAdGetGem";
 
         [SerializeField]
@@ -58,7 +58,16 @@ namespace Test.FactoryRun.UI
         
             foreach(ProductCatalogItem item in catalog.allProducts)
             {
-                builder.AddProduct(item.id, item.type);
+                List<PayoutDefinition> pds = new();
+                for(int i = 0; i < item.Payouts.Count; i++)
+                {
+                    ProductCatalogPayout pd = item.Payouts[i];
+
+                    PayoutDefinition pdf = new PayoutDefinition(pd.typeString, pd.subtype, pd.quantity, pd.data);
+                    pds.Add(pdf);
+                }
+
+                builder.AddProduct(item.id, item.type, null, pds);
             }
 
             UnityPurchasing.Initialize(this, builder);
@@ -105,7 +114,12 @@ namespace Test.FactoryRun.UI
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
-        { }
+        {
+            Debug.LogError($"Purchase failed Product code : {product.definition.id} \nreason: {failureDescription.message}");
+            loadingOverlay.SetActive(false);
+            onPurchaseCompleted?.Invoke();
+            onPurchaseCompleted = null;
+        }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {

@@ -23,3 +23,7 @@ MonoBehaviour:
     - Key: 3
       Value: {fileID: 9072532005086905641, guid: 697621bce97652f448b8b48abadd17c5,
         type: 3}
+  TileNormalColor: {r: 1, g: 1, b: 1, a: 1}
+  TileSelectedColor: {r: 0, g: 1, b: 0, a: 1}
+  GemGeneratedEffect: {fileID: 7392016214074370216, guid: ac980648cf9c12345b66da8700a44ab1,
+    type: 3}

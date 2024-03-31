@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Test.FactoryRun.Core
@@ -13,6 +14,9 @@ namespace Test.FactoryRun.Core
         [SerializeField]
         private FactorySettings settings;
 
+        [SerializeField]
+        private IngameCurPurchaseItems purchaseItems;
+
         private List<FactoryCell> workingCells = new List<FactoryCell>();
         private Array maxFactoryLevel = Enum.GetValues(typeof(FactoryLevel));
 
@@ -21,6 +25,8 @@ namespace Test.FactoryRun.Core
             UpgradeCell += TryUpgradeCell;
             OnGemSpawned += UpdateGemCount;
             FactorySlotHolder.InitBlocks.Invoke(settings.SlotSize, settings.InitFactoryLocationIndex);
+
+            purchaseItems.BoostDetails[BoostType.FACTORY_BOOST].OnBoostApplied += ApplyBoostToSystem;
         }
 
         ~FactoryGrid() 
@@ -55,6 +61,15 @@ namespace Test.FactoryRun.Core
             return false;
         }
 
+        private void ApplyBoostToSystem()
+        {
+            for (int i = 0; i < workingCells.Count; i++)
+            {
+                workingCells[i].ToggleFactoryBoost(true, purchaseItems.BoostDetails[BoostType.FACTORY_BOOST].EffectBoostMult);
+            }
+            WaitForFactoryBoostTimerToExpire(purchaseItems.BoostDetails[BoostType.FACTORY_BOOST].DurationOfEffect);
+        }
+
         private void UpdateGemCount(int gemCount)
         {
             GameData.UpdateGem(gemCount);
@@ -62,9 +77,39 @@ namespace Test.FactoryRun.Core
 
         public void Update()
         {
-            for(int i = 0; i < workingCells.Count; i++)
+            for (int i = 0; i < workingCells.Count; i++)
             {
                 workingCells[i].UpdateTime();
+            }
+        }
+
+        async void WaitForFactoryBoostTimerToExpire(float timer)
+        {
+            await Task.Delay((int)(timer * 1000));
+            
+            for (int i = 0; i < workingCells.Count; i++)
+            {
+                workingCells[i].ToggleFactoryBoost(false);
+            }
+        }
+
+        async void ResumeBoostTimer()
+        {
+            string utcTime = PlayerPrefs.GetString(BoostType.FACTORY_BOOST.ToString(), String.Empty);
+
+            if(!String.IsNullOrEmpty(utcTime))
+            {
+                DateTime finalTime = DateTime.Parse(utcTime).Add(TimeSpan.FromSeconds(purchaseItems.BoostDetails[BoostType.FACTORY_BOOST].DurationOfEffect));
+                if (finalTime > DateTime.UtcNow)
+                {
+                    TimeSpan remainingTime = finalTime - DateTime.UtcNow;
+                    await Task.Delay((int)remainingTime.TotalSeconds * 1000);
+
+                    for (int i = 0; i < workingCells.Count; i++)
+                    {
+                        workingCells[i].ToggleFactoryBoost(false);
+                    }
+                }
             }
         }
     }

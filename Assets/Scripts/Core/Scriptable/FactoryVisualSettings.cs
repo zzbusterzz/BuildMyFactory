@@ -9,5 +9,6 @@ namespace Test.FactoryRun.Core
         public SerializedDictionary<FactoryLevel, GameObject> FactoryInstance;
         public Color TileNormalColor = Color.white;
         public Color TileSelectedColor = Color.green;
+        public GameObject GemGeneratedEffect;
     }
 }

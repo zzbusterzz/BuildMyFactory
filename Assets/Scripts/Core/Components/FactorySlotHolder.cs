@@ -60,22 +60,6 @@ namespace Test.FactoryRun.Core
                     FactoryGrid.UpgradeCell(f);
                 }
             }
-
-            //for (int j = 0; j < slotSize.y; j++)
-            //{
-            //    for (int i = 0; i < slotSize.x; i++) 
-            //    {
-            //        FactoryCell f = Instantiate(factoryBlockBasePrefab);
-            //        f.Init(j * slotSize.y + i);
-            //        //Remember to always convert xyz to xoz since we wont utilise y in genration
-            //        Vector3 pos = new Vector3(gridStart.position.x + blockHalf.x + (i * factoryBlockSpacing.x) + (i * factoryBlockSize.x),
-            //                                  0.05f,
-            //                                  gridStart.position.z - blockHalf.y - (j * factoryBlockSpacing.y) - (j * factoryBlockSize.y));
-            //        f.transform.position = pos;
-            //        f.transform.localScale = new Vector3(factoryBlockSize.x, factoryBlockSize.y, 1);
-            //        factoryBlock.Add(f);
-            //    }
-            //}
         }
 
 #if UNITY_EDITOR

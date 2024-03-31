@@ -6,26 +6,27 @@ namespace Test.FactoryRun.UI
 {
     public class IngameGemProduct : BasePurchaseUI
     {
-        private int gemCost;
+        private BoostType id;
+        public Action<BoostType, Action> OnPurchase;
 
-        public void Setup(string title, string desc, int gemCost)
+        public void Setup(BoostType id, string title, string desc, int gemCost)
         {
             nameText.SetText(title);
             descText.SetText(desc);
             priceText.SetText(gemCost.ToString());
-            this.gemCost = gemCost;
+            this.id = id;
         }
 
         public override void Purchase()
         {
             purchaseButton.enabled = false;
-            if (GameData.UpdateGem(-gemCost))
-            {
-                Debug.Log("Purchase successful");
-                PlayerPrefs.SetString("BoosterPack", DateTime.UtcNow.ToString());
-            }
+            OnPurchase?.Invoke(id, OnPurchaseComplete);
         }
 
+        void OnPurchaseComplete()
+        {
+            purchaseButton.enabled = true;
+        }
     }
 }
 

@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iapPanel: {fileID: 2488189155342254546}
+  gameBoostPanel: {fileID: 3893889986029391659}
   gemCounter: {fileID: 2673376034538411271}
 --- !u!1 &931753899912948157
 GameObject:
@@ -1853,7 +1854,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 585365463661156302}
         m_TargetAssemblyTypeName: Test.FactoryRun.UI.GameUI, Assembly-CSharp
-        m_MethodName: ToggleIAPPanel
+        m_MethodName: ToggleIGameBoosterPanel
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2289,7 +2290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7522424677030555854}
-  - component: {fileID: 2124414347905497547}
+  - component: {fileID: 5872066769599497640}
   m_Layer: 5
   m_Name: IngameMenu
   m_TagString: Untagged
@@ -2317,7 +2318,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2124414347905497547
+--- !u!114 &5872066769599497640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2326,10 +2327,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3893889986029391659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d2a69b85e5c1dc4cafca2d6fb61b113, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f9d58984bdc84846891635598d04ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiProductPrefab: {fileID: 4181179550221328545, guid: 068d0fd7d3f83df44a6e3de182e11584,
+  availItems: {fileID: 11400000, guid: abfe54440416aea4a9127ebdc8d6ab65, type: 2}
+  uiProductPrefab: {fileID: 6383380257782570672, guid: e1db3d82e6a140a4e95cae366da8418d,
     type: 3}
   uiAttachPoint: {fileID: 3684835882265948705}
   loadingOverlay: {fileID: 4308315102201029917}
@@ -2458,7 +2460,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 585365463661156302}
         m_TargetAssemblyTypeName: Test.FactoryRun.UI.GameUI, Assembly-CSharp
-        m_MethodName: ToggleIAPPanel
+        m_MethodName: ToggleIGameBoosterPanel
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
