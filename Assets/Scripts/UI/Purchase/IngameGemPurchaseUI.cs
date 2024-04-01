@@ -76,6 +76,7 @@ namespace Test.FactoryRun.UI
             }
             loadingOverlay.SetActive(false);
             onPurchaseComplete?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

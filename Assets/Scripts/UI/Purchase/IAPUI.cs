@@ -42,6 +42,10 @@ namespace Test.FactoryRun.UI
             ResourceRequest op = Resources.LoadAsync<TextAsset>("IAPProductCatalog");
             op.completed += HandleIAPCatalogLoaded;
 
+
+#if DEVELOPMENT_BUILD
+            gameObject.SetActive(false);
+#endif
         }
 
         private void HandleIAPCatalogLoaded(AsyncOperation operation)
