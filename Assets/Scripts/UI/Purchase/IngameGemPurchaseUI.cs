@@ -50,12 +50,12 @@ namespace Test.FactoryRun.UI
                 
                 //Compare previous purchase timestamp and see if the timer is complete
                 //if not throw error message
-                if (finalTime < DateTime.UtcNow)
+                if (finalTime < UTCTimer.UtcNow)
                 {
                     if (GameData.UpdateGem(-itemSpecification.Cost))
                     {
                         Debug.Log("Purchase successful");
-                        PlayerPrefs.SetString(item.ToString(), DateTime.UtcNow.ToString());
+                        PlayerPrefs.SetString(item.ToString(), UTCTimer.UtcNow.ToString());
                         itemSpecification.OnBoostApplied?.Invoke();
                     }
                 }
@@ -70,7 +70,7 @@ namespace Test.FactoryRun.UI
                 if (GameData.UpdateGem(-itemSpecification.Cost))
                 {
                     Debug.Log("Purchase successful");
-                    PlayerPrefs.SetString(item.ToString(), DateTime.UtcNow.ToString());
+                    PlayerPrefs.SetString(item.ToString(), UTCTimer.UtcNow.ToString());
                     itemSpecification.OnBoostApplied?.Invoke();
                 }
             }

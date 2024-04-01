@@ -1,10 +1,10 @@
-﻿using System;
-using Test.FactoryRun.UI;
+﻿using Test.FactoryRun.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Test.FactoryRun.Core
 {
+
     [RequireComponent(typeof(BoxCollider))]
     public class FactoryCell:MonoBehaviour,IPointerClickHandler
     {   
@@ -82,6 +82,8 @@ namespace Test.FactoryRun.Core
             if (visualRep != null)
             {
                 //TODO: Pool object
+                //Do not use this in actual code
+                //I hate it
                 GameObject.Destroy(visualRep);
             }
             level++;
@@ -94,5 +96,39 @@ namespace Test.FactoryRun.Core
         {
             meshRenderer.material.color = settings.TileNormalColor;
         }
+
+        #region SAVE_LOAD
+        public FactoryData GetCurrentData()
+        {
+            FactoryData data = new FactoryData();
+            data.Level = level;
+            data.CurTime = curTime;
+            data.BlockIndex = blockIndex;
+            return data;
+        }
+
+        public void SetFactoryData(FactoryData data)
+        {
+            level = data.Level; 
+            curTime = data.CurTime;
+
+            GemSpawnData gsd = factorySettings.GemSpawnDetails[Level];
+            curGemCount = gsd.GemsSpawned;
+            timeToSpawn = gsd.Time;
+
+            DeselectTile();
+            //Allow if max upgrade not reached
+            if (visualRep != null)
+            {
+                //TODO: Pool object
+                //Do not use this in actual code
+                //I hate it
+                GameObject.Destroy(visualRep);
+            }
+            visualRep = GameObject.Instantiate(settings.FactoryInstance[Level].gameObject,
+                                                transform);
+            visualRep.transform.localPosition = Vector3.zero;
+        }
+        #endregion
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Test.FactoryRun.Core
 {
+
     public static class AdReward
     {
         // These ad units are configured to always serve test ads.

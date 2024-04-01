@@ -32,6 +32,7 @@ namespace Test.FactoryRun.UI
 
         public void OnExitClick()
         {
+            GameManager.OnUIGameAction(GameState.EXITING);
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else

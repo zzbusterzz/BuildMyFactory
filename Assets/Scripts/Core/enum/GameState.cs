@@ -5,6 +5,7 @@
         MENU,
         NEW_GAME,
         CONTINUE,
-        RUNNING
+        RUNNING,
+        EXITING
     }
 }

@@ -8,7 +8,7 @@ namespace Test.FactoryRun.Core
     {
         public static Func<int, bool> UpdateGem;
         
-        public int Gems;
+        public double Gems;
 
         public GameData() 
         {

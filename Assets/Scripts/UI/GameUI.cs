@@ -6,7 +6,7 @@ namespace Test.FactoryRun.UI
 {
     public class GameUI : MonoBehaviour
     {
-        public static Action<int> updateGemCountUI;
+        public static Action<double> updateGemCountUI;
 
         [SerializeField]
         private GameObject iapPanel;
@@ -27,9 +27,9 @@ namespace Test.FactoryRun.UI
             updateGemCountUI -= updateGemCounter;
         }
 
-        private void updateGemCounter(int obj)
+        private void updateGemCounter(double gemCount)
         {
-            gemCounter.SetText(obj.ToString());
+            gemCounter.SetText(gemCount.ToString());
         }
 
         public void ToggleIAPPanel(bool val)

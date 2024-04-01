@@ -7,6 +7,7 @@ namespace Test.FactoryRun.Core
     public class FactorySlotHolder : MonoBehaviour
     {
         public static Action<Vector2Int, int> InitBlocks;
+        public static Action<FactoryData> LoadDataInBlock;
 
         #region SERIALISED_FIELDS
         [SerializeField]
@@ -29,6 +30,7 @@ namespace Test.FactoryRun.Core
         private void Start()
         {
             InitBlocks += Init;
+            LoadDataInBlock += LoadDataFromSaveFile;
         }
 
         private void OnDestroy()
@@ -60,6 +62,13 @@ namespace Test.FactoryRun.Core
                     FactoryGrid.UpgradeCell(f);
                 }
             }
+        }
+
+        private void LoadDataFromSaveFile(FactoryData data)
+        {
+            FactoryCell cell = factoryBlock[data.BlockIndex];
+            FactoryGrid.UpgradeCellForced(cell);
+            cell.SetFactoryData(data);
         }
 
 #if UNITY_EDITOR
