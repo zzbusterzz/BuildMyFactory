@@ -132,6 +132,8 @@ namespace Test.FactoryRun.Core
                         workingCells[i].ToggleFactoryBoost(true, purchaseItems.BoostDetails[BoostType.FACTORY_BOOST].EffectBoostMult);
                     }
                     boostIsRunning = true;
+
+                    source = new CancellationTokenSource();
                     await Task.Delay((int)remainingTime.TotalSeconds * 1000, source.Token);
                     boostIsRunning = false;
                     for (int i = 0; i < workingCells.Count; i++)

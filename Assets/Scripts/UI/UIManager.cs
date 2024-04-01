@@ -10,10 +10,14 @@ namespace Test.FactoryRun.UI
         [SerializeField]
         private GameObject gamePanel;
 
+        [SerializeField]
+        private GameObject continueButton;
+
         private void Start()
         {
             mainMenuPanel.SetActive(true);
             gamePanel.SetActive(false);
+            continueButton.SetActive(SaveGameManager.IsSaveDataPresent.Invoke());
         }
 
         public void OnNewClick()

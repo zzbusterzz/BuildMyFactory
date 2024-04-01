@@ -14,11 +14,13 @@ namespace Test.FactoryRun.Core
         private int defaultGemCount = 10;
 
         private GameState gameState;
-        private SaveGameManager saveGameManager = new ();
-        private GameData gameData = new();
+        private SaveGameManager saveGameManager;
+        private GameData gameData;
 
         private void Awake()
         {
+            saveGameManager = new();
+            gameData = new();
             UTCTimer.InitializeTime();
         }
 
@@ -62,7 +64,7 @@ namespace Test.FactoryRun.Core
 
                 case GameState.CONTINUE:
                     factoryGrid.Init();
-                    UpdateGemData();
+                    UpdateData();
                     gameState = GameState.RUNNING;
                     break;
 
@@ -73,7 +75,7 @@ namespace Test.FactoryRun.Core
         }
 
 
-        void UpdateGemData()
+        void UpdateData()
         {
             SaveDataGroup saveDataGroup = saveGameManager.LoadState();
             gameData = saveDataGroup.GameData;
@@ -89,7 +91,8 @@ namespace Test.FactoryRun.Core
 
             foreach (FactoryData fd in saveDataGroup.FactoryDatas)
             {
-                double spawnInstances = elapsedTime.TotalSeconds / (double) fs.GemSpawnDetails[fd.Level].Time;
+                double spawnInstances = Math.Truncate(elapsedTime.TotalSeconds / (double) fs.GemSpawnDetails[fd.Level].Time);
+                
                 //Im ignoring double data but it will break if the spawn instances are way too large
                 gameData.Gems += fs.GemSpawnDetails[fd.Level].GemsSpawned * spawnInstances;
                 factoryGrid.LoadData(fd);

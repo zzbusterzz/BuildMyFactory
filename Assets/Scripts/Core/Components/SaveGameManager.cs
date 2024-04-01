@@ -12,7 +12,7 @@ namespace Test.FactoryRun.Core
 
         public SaveGameManager()
         {
-            IsSaveDataPresent = HasSaveData;
+            IsSaveDataPresent += HasSaveData;
         }
 
         ~ SaveGameManager()

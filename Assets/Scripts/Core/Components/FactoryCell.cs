@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 namespace Test.FactoryRun.Core
 {
-
     [RequireComponent(typeof(BoxCollider))]
     public class FactoryCell:MonoBehaviour,IPointerClickHandler
     {   
@@ -78,7 +77,7 @@ namespace Test.FactoryRun.Core
         public void OnUpdateCompleted()
         {
             DeselectTile();
-            //Allow if max upgrade not reached
+
             if (visualRep != null)
             {
                 //TODO: Pool object
@@ -117,7 +116,6 @@ namespace Test.FactoryRun.Core
             timeToSpawn = gsd.Time;
 
             DeselectTile();
-            //Allow if max upgrade not reached
             if (visualRep != null)
             {
                 //TODO: Pool object
